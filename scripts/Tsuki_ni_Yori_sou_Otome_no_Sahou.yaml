@@ -1,0 +1,39 @@
+name: Tsuki ni Yori sou Otome no Sahou
+game_slug: Tsuki ni Yori sou Otome no Sahou
+version: Tsuki ni yori Sou Otome no Sahou V1
+slug: tsukiyori
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/prefix/drive_c/Program Files/月に寄りそう乙女の作法_FullVoiceEdition/月に寄りそう乙女の作法_FV.exe
+    arch: win32
+    prefix: $GAMEDIR/prefix
+    working_dir: $GAMEDIR/prefix
+  files:
+  - setup: "N/A:Select the game's setup file"
+
+  installer:
+  - task:
+      name: create_prefix
+      prefix: $GAMEDIR/prefix
+      arch: win32
+  - task:
+      app: dotnet40 vcrun6 ffdshow corefonts d3dx9_36 quartz devenum win7 sandbox
+      arch: win32
+      name: winetricks
+      prefix: $GAMEDIR/prefix
+  - task:
+      executable: setup
+      arch: win32
+      name: wineexec
+      prefix: $GAMEDIR/prefix
+
+  wine:
+    Desktop: true
+    WineDesktop: 1280x720
+    dxvk: true
+
+  system:
+    env:
+      LANG: ja_JP.UTF-8

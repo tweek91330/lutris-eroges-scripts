@@ -1,0 +1,39 @@
+name: Rance 10
+game_slug: Rance10
+version: Rance10 V1
+slug: rance10
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/prefix/drive_c/Program Files/AliceSoft/ランス１０/Rance10.exe
+    arch: win32
+    prefix: $GAMEDIR/prefix
+    working_dir: $GAMEDIR/prefix
+  files:
+  - setup: "N/A:Select the game's setup file"
+
+  installer:
+  - task:
+      name: create_prefix
+      prefix: $GAMEDIR/prefix
+      arch: win32
+  - task:
+      app: dotnet40 vcrun6 ffdshow corefonts d3dx9_36 quartz devenum win7 sandbox
+      arch: win32
+      name: winetricks
+      prefix: $GAMEDIR/prefix
+  - task:
+      executable: setup
+      arch: win32
+      name: wineexec
+      prefix: $GAMEDIR/prefix
+
+  wine:
+    Desktop: true
+    WineDesktop: 1280x720
+    dxvk: true
+
+  system:
+    env:
+      LANG: ja_JP.UTF-8

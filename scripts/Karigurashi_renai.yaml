@@ -1,12 +1,12 @@
-name: Venus Blood Lagoon
-game_slug: Venus Blood Lagoon
-version: Venus Blood Lagoon V1.0
-slug: vbl-installer
+name: Karigurashi Renai
+game_slug: Karigurashi Renai
+version: Karigurashi Renai V1.0
+slug: karigurashi-renai
 runner: wine
 
 script:
   game:
-    exe: $GAMEDIR/prefix/drive_c/venusblood/VBL.exe
+    exe: $GAMEDIR/prefix/drive_c/Program Files/asaproject/かりぐらし恋愛/かりぐらし恋愛.exe
     arch: win32
     prefix: $GAMEDIR/prefix
     working_dir: $GAMEDIR/prefix
@@ -19,12 +19,11 @@ script:
       prefix: $GAMEDIR/prefix
       arch: win32
   - task:
-      app: dotnet40 vcrun6 ffdshow corefonts d3dx9_36 quartz devenum win7
+      app: dotnet40 vcrun6 ffdshow corefonts d3dx9_36 quartz devenum win7 sandbox
       arch: win32
       name: winetricks
       prefix: $GAMEDIR/prefix
   - task:
-      args: /SILENT /SP- /NOCANCEL /SUPPRESSMSGBOXES /NOGUI /DIR="C:/venusblood" 
       executable: setup
       arch: win32
       name: wineexec

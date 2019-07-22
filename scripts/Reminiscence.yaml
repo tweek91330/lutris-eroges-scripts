@@ -1,0 +1,38 @@
+name: Reminiscence
+game_slug: Reminiscence
+version: Reminiscence V1.0
+slug: reminiscence
+runner: wine
+
+script:
+  game:
+    exe: $GAMEDIR/prefix/drive_c/drive_c/てぃ～ぐる/レミニセンス/レミニセンス.exe
+    arch: win32
+    prefix: $GAMEDIR/prefix
+    working_dir: $GAMEDIR/prefix
+  files:
+  - setup: "N/A:Select the game's setup file"
+
+  installer:
+  - task:
+      name: create_prefix
+      prefix: $GAMEDIR/prefix
+      arch: win32
+  - task:
+      app: dotnet40 vcrun6 ffdshow corefonts d3dx9_36 quartz devenum win7 sandbox
+      arch: win32
+      name: winetricks
+      prefix: $GAMEDIR/prefix
+  - task:
+      executable: setup
+      arch: win32
+      name: wineexec
+      prefix: $GAMEDIR/prefix
+
+  wine:
+    Desktop: true
+    WineDesktop: 1280x720
+
+  system:
+    env:
+      LANG: ja_JP.UTF-8
